@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ココロの插畫玻璃小室 | 印花作品集</title>
+  <!-- Google Fonts: Noto Sans TC & Zen Maru Gothic for Japanese soft feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --------------------------------------------------
+       1. Base & Theme Variables (日系溫柔色調)
+    -------------------------------------------------- */
+    :root {
+      --bg-color: #FFFDF9;           /* 柔和米白背景 */
+      --card-bg: #FFFFFF;            /* 純白卡片 */
+      --text-main: #4A443F;          /* 暖深灰/大地色文字 */
+      --text-sub: #7D756D;           /* 柔和副文字 */
+      --accent-warm: #E09F67;        /* 暖陽橘暖色 */
+      --accent-soft: #EEF2E6;        /* 鼠尾草綠微底色 */
+      --border-color: #F0EAE1;      /* 細緻柔和邊框 */
+      --shadow-soft: 0 8px 24px rgba(180, 165, 150, 0.08);
+      --font-main: 'Noto Sans TC', sans-serif;
+      --font-rounded: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* --------------------------------------------------
+       2. Top Navigation Bar
+    -------------------------------------------------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 253, 249, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-family: var(--font-rounded);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-brand:hover {
+      color: var(--accent-warm);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-sub);
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-warm);
+    }
+
+    /* --------------------------------------------------
+       3. Hero & About Section (創作者介紹)
+    -------------------------------------------------- */
+    .hero-section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .avatar-wrapper {
+      margin: 0 auto 1.5rem auto;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(180, 165, 150, 0.15);
+      border: 3px solid #FFFFFF;
+    }
+
+    .avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bio-text {
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 2;
+      font-weight: 400;
+    }
+
+    /* --------------------------------------------------
+       4. Pattern Portfolio Grid (印花作品區)
+    -------------------------------------------------- */
+    .portfolio-section {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 2rem 1.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-rounded);
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 3rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* 網格排版：桌機版 1列3欄 */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    /* 作品卡片 */
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(180, 165, 150, 0.15);
+    }
+
+    /* 輪播圖容器 */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* 1:1 正方形比例 */
+      overflow: hidden;
+      background-color: #F9F6F0;
+    }
+
+    .carousel-slides {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+      cursor: pointer;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 輪播左右切換按鈕 */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.75);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 0.3s ease, background 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-container:hover .carousel-btn {
+      opacity: 1;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
+    /* 頁碼指示點 */
+    .carousel-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .dot.active {
+      background: #FFFFFF;
+      transform: scale(1.3);
+    }
+
+    /* 卡片文字說明區 */
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .pattern-title {
+      font-family: var(--font-rounded);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 0.6rem;
+    }
+
+    .pattern-concept {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    /* --------------------------------------------------
+       4b. 3D Coverflow Horizontal Showcase Carousel (精選插畫 3D 輪播區)
+    -------------------------------------------------- */
+    .showcase-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .showcase-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+      margin: 1.5rem 0;
+    }
+
+    .showcase-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-style: preserve-3d;
+    }
+
+    .showcase-card {
+      position: absolute;
+      width: 360px;
+      height: 270px; /* 橫式 4:3 比例 */
+      border-radius: 10px; /* 已縮小圓角 */
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 25px rgba(180, 165, 150, 0.2);
+      cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      user-select: none;
+    }
+
+    .showcase-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* 3D Coverflow 立體旋轉狀態 */
+    .showcase-card.state-center {
+      transform: translateX(0) translateZ(100px) rotateY(0deg) scale(1.05);
+      z-index: 10;
+      opacity: 1;
+      border-color: var(--accent-warm);
+      box-shadow: 0 16px 36px rgba(180, 165, 150, 0.35);
+    }
+
+    .showcase-card.state-left {
+      transform: translateX(-260px) translateZ(0px) rotateY(25deg) scale(0.85);
+      z-index: 5;
+      opacity: 0.75;
+      filter: brightness(0.9);
+    }
+
+    .showcase-card.state-right {
+      transform: translateX(260px) translateZ(0px) rotateY(-25deg) scale(0.85);
+      z-index: 5;
+      opacity: 0.75;
+      filter: brightness(0.9);
+    }
+
+    .showcase-card.state-hidden-left {
+      transform: translateX(-450px) translateZ(-100px) rotateY(35deg) scale(0.7);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .showcase-card.state-hidden-right {
+      transform: translateX(450px) translateZ(-100px) rotateY(-35deg) scale(0.7);
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* 左右導覽箭頭 */
+    .showcase-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border-color);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-main);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      z-index: 30;
+    }
+
+    .showcase-arrow:hover {
+      background: #FFFFFF;
+      color: var(--accent-warm);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .showcase-arrow.prev { left: 10px; }
+    .showcase-arrow.next { right: 10px; }
+
+    /* 下方作品名稱標籤 */
+    .showcase-info {
+      margin-top: 1.5rem;
+      min-height: 2.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .showcase-title-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 2rem;
+      background-color: #FFFFFF;
+      border: 1px solid var(--accent-warm);
+      border-radius: 50px;
+      font-family: var(--font-rounded);
+      font-size: 1.05rem;
+      color: var(--accent-warm);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+
+    /* --------------------------------------------------
+       5. Contact & Footer (合作聯繫)
+    -------------------------------------------------- */
+    .contact-section {
+      border-top: 1px solid var(--border-color);
+      background-color: rgba(249, 246, 240, 0.5);
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+
+    .contact-intro {
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      margin-top: -1.8rem;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.6rem;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(180, 165, 150, 0.05);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .contact-btn:hover {
+      border-color: var(--accent-warm);
+      color: var(--accent-warm);
+      transform: translateY(-2px);
+    }
+
+    .footer-copy {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      opacity: 0.7;
+    }
+
+    /* Lightbox Preview Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(40, 35, 30, 0.85);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text-main);
+      color: #FFFFFF;
+      padding: 0.6rem 1.4rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      transition: transform 0.3s ease;
+      z-index: 2000;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* --------------------------------------------------
+       7. Responsive Layout (手機版適應)
+    -------------------------------------------------- */
+    @media (max-width: 768px) {
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      .showcase-card {
+        width: 260px;
+        height: 195px; /* 手機版橫式 4:3 比例 */
+      }
+      .showcase-card.state-left {
+        transform: translateX(-140px) translateZ(0px) rotateY(20deg) scale(0.8);
+      }
+      .showcase-card.state-right {
+        transform: translateX(140px) translateZ(0px) rotateY(-20deg) scale(0.8);
+      }
+      .hero-section {
+        padding-top: 3rem;
+      }
+      .navbar {
+        padding: 0.8rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 導覽列 -->
+  <nav class="navbar">
+    <a href="#" class="nav-brand">ココロの插畫玻璃小室</a>
+    <ul class="nav-links">
+      <li><a href="#portfolio">印花創作</a></li>
+      <li><a href="#showcase">插畫作品</a></li>
+      <li><a href="#contact">合作聯繫</a></li>
+    </ul>
+  </nav>
+
+  <!-- 創作者介紹 (Hero Section) -->
+  <section class="hero-section">
+    <div class="avatar-wrapper">
+      <img src="https://i.ibb.co/SDmz5rDW/kokoro.png" alt="ココロ" onerror="this.src='https://placehold.co/400x400/EEF2E6/4A443F?text=kokoro'">
+    </div>
+    <p class="bio-text">
+      我是ココロ，<br>
+      喜歡畫畫、手作帶來的療癒與成就感<br>
+      作品多為可愛童趣風格<br>
+      漫漫的生活中體驗所感、畫著心中所感的風景、日常的想法<br>
+      在這裡畫著、點亮著泡芙醬的夢境一隅。
+    </p>
+  </section>
+
+  <!-- 印花作品區 -->
+  <section class="portfolio-section" id="portfolio">
+    <h2 class="section-title">印花創作</h2>
+    
+    <div class="portfolio-grid" id="grid">
+      <!-- 作品卡片將由 JavaScript 動態渲染 -->
+    </div>
+  </section>
+
+  <!-- 3D Coverflow 插畫作品輪播區 -->
+  <section class="showcase-section" id="showcase">
+    <h2 class="section-title">插畫作品</h2>
+    
+    <div class="showcase-wrapper">
+      <button class="showcase-arrow prev" onclick="rotateShowcasePrev()" title="上一張">❮</button>
+      <div class="showcase-container" id="showcase-container">
+        <!-- 3D 輪播卡片由 JavaScript 動態生成 -->
+      </div>
+      <button class="showcase-arrow next" onclick="rotateShowcaseNext()" title="下一張">❯</button>
+    </div>
+
+    <div class="showcase-info">
+      <div class="showcase-title-badge" id="showcase-title-badge">
+        點擊圖片預覽作品
+      </div>
+    </div>
+  </section>
+
+  <!-- 合作聯繫區 -->
+  <footer class="contact-section" id="contact">
+    <h2 class="section-title">合作聯繫</h2>
+    <p class="contact-intro">有插畫、印花授權需求，歡迎來信詳談</p>
+    <div class="contact-links">
+      <button class="contact-btn" onclick="copyEmail('kokoroxpuff@gmail.com')">
+        ✉️ E-mail: kokoroxpuff@gmail.com
+      </button>
+      <a href="https://portaly.cc/kokoro.puff" target="_blank" class="contact-btn">
+        🌐 傳送門 Portal
+      </a>
+      <a href="https://www.instagram.com/kokoro.puff/" target="_blank" class="contact-btn">
+        📷 Instagram
+      </a>
+    </div>
+    <p class="footer-copy">© ココロの插畫玻璃小室. All rights reserved.</p>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Enlarged Pattern">
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">已複製 Email 到剪貼簿！</div>
+
+  <script>
+    // 3 件主展示作品資料
+    const patternData = [
+      {
+        title: "夏日水樂園 Summer Water Park",
+        concept: `炎熱的夏天到水樂園清涼一下最好了~
+感受水的冰涼、急彎的滑水道帶來的速度與水花，
+想放鬆也可以就這樣躺在泳圈上，
+順著水道漂浮其中，
+靜靜地看著天上的雲朵飄過，
+享受夏天的惬意時光。`,
+        images: [
+          "https://i.ibb.co/R4656pb0/PIC11.jpg",
+          "https://i.ibb.co/xKQzVHnq/PIC12.jpg",
+          "https://i.ibb.co/p6XWKDkC/PIC13.jpg",
+          "https://i.ibb.co/ZsjggZW/PIC14.jpg",
+          "https://i.ibb.co/FbnY65Lc/PIC16.jpg",
+          "https://i.ibb.co/ZzgBLg0K/PIC17.jpg",
+          "https://i.ibb.co/rKyJjY45/PIC18.jpg"
+        ]
+      },
+      {
+        title: "聖誕樹群中的小可愛 The cutie among the Christmas trees",
+        concept: `簡單的線條描繪出各種樣貌的聖誕樹
+一棵棵都有屬於他們的點點星光
+來選一棵自己喜歡的吧
+走著走著發現有一棵..不是..
+是一個扮成聖誕樹的小可愛
+找到了嗎!
+正拿著魔杖準備為你實現願望呢🪄`,
+        images: [
+          "https://i.ibb.co/Ng7Kb94L/PIC.jpg",
+          "https://i.ibb.co/hFGd9w6X/PIC2.jpg",
+          "https://i.ibb.co/kgdznf9F/PIC4.jpg",
+          "https://i.ibb.co/yB7sp3QZ/PIC3.jpg",
+          "https://i.ibb.co/TBFT2bc2/PIC6.jpg",
+          "https://i.ibb.co/whR1C8zV/PIC7.jpg",
+          "https://i.ibb.co/nKXy37d/PIC8.jpg",
+          "https://i.ibb.co/WvLKPPRZ/PIC9.jpg",
+          "https://i.ibb.co/27k8v6kg/PIC10.jpg"
+        ]
+      },
+      {
+        title: "好運咩咩不絕 Endless Luck & Joy",
+        concept: `羊群跳躍在星星草原，
+孩子們將羊毛編織成了線連繫著大家，
+仔細找可以發現咩咩帶來的小幸運，
+象徵好運如同咩咩羊一樣綿綿不絕~`,
+        images: [
+          "https://i.ibb.co/spysKkQR/PIC19.jpg",
+          "https://i.ibb.co/CstLVz8N/PIC20.jpg"
+        ]
+      }
+    ];
+
+    // 動態產生作品卡片
+    const grid = document.getElementById('grid');
+
+    patternData.forEach((item, cardIdx) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const slidesHTML = item.images.map((img, imgIdx) => `
+        <div class="carousel-slide ${imgIdx === 0 ? 'active' : ''}" onclick="openLightbox('${img}')">
+          <img src="${img}" alt="${item.title}" onerror="this.src='https://placehold.co/800x800/EEF2E6/4A443F?text=Pattern+Image'">
+        </div>
+      `).join('');
+
+      const dotsHTML = item.images.map((_, imgIdx) => `
+        <div class="dot ${imgIdx === 0 ? 'active' : ''}"></div>
+      `).join('');
+
+      card.innerHTML = `
+        <div class="carousel-container" id="carousel-${cardIdx}">
+          <div class="carousel-slides">${slidesHTML}</div>
+          <button class="carousel-btn prev" onclick="prevSlide(${cardIdx}, event)">❮</button>
+          <button class="carousel-btn next" onclick="nextSlide(${cardIdx}, event)">❯</button>
+          <div class="carousel-dots">${dotsHTML}</div>
+        </div>
+        <div class="card-body">
+          <h3 class="pattern-title">${item.title}</h3>
+          <p class="pattern-concept">${item.concept}</p>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    // 印花卡片輪播邏輯
+    const activeIndices = patternData.map(() => 0);
+    const intervals = [];
+
+    function updateCarousel(cardIdx) {
+      const container = document.getElementById(`carousel-${cardIdx}`);
+      const slides = container.querySelectorAll('.carousel-slide');
+      const dots = container.querySelectorAll('.dot');
+      const currentIdx = activeIndices[cardIdx];
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentIdx);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIdx);
+      });
+    }
+
+    function nextSlide(cardIdx, e) {
+      if (e) e.stopPropagation();
+      const total = patternData[cardIdx].images.length;
+      activeIndices[cardIdx] = (activeIndices[cardIdx] + 1) % total;
+      updateCarousel(cardIdx);
+    }
+
+    function prevSlide(cardIdx, e) {
+      if (e) e.stopPropagation();
+      const total = patternData[cardIdx].images.length;
+      activeIndices[cardIdx] = (activeIndices[cardIdx] - 1 + total) % total;
+      updateCarousel(cardIdx);
+    }
+
+    patternData.forEach((_, cardIdx) => {
+      const container = document.getElementById(`carousel-${cardIdx}`);
+      const startTimer = () => { intervals[cardIdx] = setInterval(() => nextSlide(cardIdx), 3000); };
+      const stopTimer = () => clearInterval(intervals[cardIdx]);
+      startTimer();
+      container.addEventListener('mouseenter', stopTimer);
+      container.addEventListener('mouseleave', startTimer);
+    });
+
+    // --------------------------------------------------
+    // 水平創作 3D Coverflow 輪播區
+    // --------------------------------------------------
+    const showcasePool = [
+      {
+        title: "聖誕雪花球",
+        image: "https://i.ibb.co/rG7tMY1G/p8.png"
+      },
+      {
+        title: "粽子島",
+        image: "https://i.ibb.co/zhCtzBV2/p7.png"
+      },
+      {
+        title: "甜點遊樂園",
+        image: "https://i.ibb.co/ZRS6cs72/p6.png"
+      },
+      {
+        title: "探險生乳捲",
+        image: "https://i.ibb.co/5h1hFXTv/p5.png"
+      },
+      {
+        title: "散步落羽松",
+        image: "https://i.ibb.co/gFRGNT3x/p4.png"
+      },
+      {
+        title: "森光悠游",
+        image: "https://i.ibb.co/YFfq9bjr/p3.png"
+      },
+      {
+        title: "靜靜放空",
+        image: "https://i.ibb.co/gLMbjzjp/p.png"
+      }
+    ];
+
+    let showcaseCurrentIndex = 0;
+
+    function init3DShowcase() {
+      const container = document.getElementById('showcase-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      showcasePool.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'showcase-card';
+        card.dataset.index = index;
+        card.innerHTML = `<img src="${item.image}" alt="${item.title}" onerror="this.src='https://placehold.co/800x800/EEF2E6/4A443F?text=Showcase'">`;
+        
+        card.onclick = () => {
+          if (index !== showcaseCurrentIndex) {
+            showcaseCurrentIndex = index;
+            update3DShowcase();
+          } else {
+            openLightbox(item.image);
+          }
+        };
+
+        container.appendChild(card);
+      });
+
+      update3DShowcase();
+    }
+
+    function update3DShowcase() {
+      const cards = document.querySelectorAll('.showcase-card');
+      const total = showcasePool.length;
+
+      cards.forEach((card, index) => {
+        card.className = 'showcase-card';
+
+        let diff = index - showcaseCurrentIndex;
+        if (diff > total / 2) diff -= total;
+        if (diff < -total / 2) diff += total;
+
+        if (diff === 0) {
+          card.classList.add('state-center');
+        } else if (diff === -1) {
+          card.classList.add('state-left');
+        } else if (diff === 1) {
+          card.classList.add('state-right');
+        } else if (diff < -1) {
+          card.classList.add('state-hidden-left');
+        } else if (diff > 1) {
+          card.classList.add('state-hidden-right');
+        }
+      });
+
+      const activeItem = showcasePool[showcaseCurrentIndex];
+      showShowcaseTitle(activeItem.title);
+    }
+
+    function showShowcaseTitle(title) {
+      const badge = document.getElementById('showcase-title-badge');
+      if (badge) {
+        badge.innerHTML = title;
+      }
+    }
+
+    function rotateShowcaseNext() {
+      showcaseCurrentIndex = (showcaseCurrentIndex + 1) % showcasePool.length;
+      update3DShowcase();
+    }
+
+    function rotateShowcasePrev() {
+      showcaseCurrentIndex = (showcaseCurrentIndex - 1 + showcasePool.length) % showcasePool.length;
+      update3DShowcase();
+    }
+
+    init3DShowcase();
+
+    // 已將時間間隔調整為 3000ms (3秒)
+    let showcaseTimer = setInterval(rotateShowcaseNext, 3000);
+    const showcaseSec = document.getElementById('showcase');
+    if (showcaseSec) {
+      showcaseSec.addEventListener('mouseenter', () => clearInterval(showcaseTimer));
+      showcaseSec.addEventListener('mouseleave', () => {
+        clearInterval(showcaseTimer);
+        showcaseTimer = setInterval(rotateShowcaseNext, 3000);
+      });
+    }
+
+    // Lightbox 功能
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Email 複製功能
+    function copyEmail(email) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(showToast);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = email;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showToast();
+      }
+    }
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+  </script>
+</body>
+</html>
